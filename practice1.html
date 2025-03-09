@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Exercise - Day 1 - Abu Turab</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS for Practice Exercise */
+        #code {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #output {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        #hint {
+            margin-top: 10px;
+            font-style: italic;
+            color: #4CAF50;
+        }
+
+        #chances {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Practice Exercise - Day 1</h1>
+        <p>By Abu Turab</p>
+    </header>
+    <main>
+        <h2>Write a C++ program to print "Hello, [Your Name]".</h2>
+        <textarea id="code" placeholder="Write your C++ code here..."></textarea>
+        <button onclick="runCode()">Run Code</button>
+        <div id="hint">Hint: Use `cout` to print the message. Example: `cout << "Hello, [Your Name]";`</div>
+        <div id="chances">Chances left: 5</div>
+        <h3>Output:</h3>
+        <pre id="output"></pre>
+    </main>
+    <script>
+        let chancesLeft = 5;
+        const requiredParts = [
+            "#include <iostream>",
+            "using namespace std;",
+            "int main()",
+            "return 0;"
+        ];
+
+        // Function to check for errors in the code
+        function checkForErrors(code) {
+            const errors = [];
+
+            // Check for missing parts
+            requiredParts.forEach(part => {
+                if (!code.includes(part)) {
+                    errors.push(`Error: Missing "${part}"`);
+                }
+            });
+
+            return errors;
+        }
+
+        // Function to extract the name from the code
+        function extractName(code) {
+            const regex = /cout\s*<<\s*"Hello,\s*([^"]+)"/;
+            const match = code.match(regex);
+            return match ? match[1] : null;
+        }
+
+        // Function to run the code
+        function runCode() {
+            const code = document.getElementById("code").value;
+            const outputElement = document.getElementById("output");
+            const hintElement = document.getElementById("hint");
+            const chancesElement = document.getElementById("chances");
+
+            // Check for errors
+            const errors = checkForErrors(code);
+
+            if (errors.length > 0) {
+                chancesLeft--;
+                if (chancesLeft > 0) {
+                    outputElement.textContent = errors.join("\n");
+                    outputElement.classList.add("error");
+                    outputElement.classList.remove("success");
+                    hintElement.textContent = "Hint: Use `cout` to print the message. Example: `cout << \"Hello, [Your Name]\";`";
+                    chancesElement.textContent = "Chances left: " + chancesLeft;
+                } else {
+                    outputElement.textContent = "Hello, your name is Abu Turab";
+                    outputElement.classList.remove("error");
+                    outputElement.classList.add("success");
+                    hintElement.textContent = "You have used all your chances. Here's a special message for you!";
+                    chancesElement.textContent = "Chances left: 0";
+                    document.getElementById("code").disabled = true;
+                    document.querySelector("button").disabled = true;
+                }
+            } else {
+                // Extract the name from the code
+                const name = extractName(code);
+
+                if (name) {
+                    outputElement.textContent = `Hello, ${name}`;
+                    outputElement.classList.remove("error");
+                    outputElement.classList.add("success");
+                    hintElement.textContent = "Great job! Your code is correct.";
+                    chancesElement.textContent = "Chances left: " + chancesLeft;
+                } else {
+                    chancesLeft--;
+                    if (chancesLeft > 0) {
+                        outputElement.textContent = "Error: Your code is incorrect. Please check the hint.";
+                        outputElement.classList.add("error");
+                        outputElement.classList.remove("success");
+                        hintElement.textContent = "Hint: Use `cout` to print the message. Example: `cout << \"Hello, [Your Name]\";`";
+                        chancesElement.textContent = "Chances left: " + chancesLeft;
+                    } else {
+                        outputElement.textContent = "Hello, your name is Abu Turab";
+                        outputElement.classList.remove("error");
+                        outputElement.classList.add("success");
+                        hintElement.textContent = "You have used all your chances. Here's a special message for you!";
+                        chancesElement.textContent = "Chances left: 0";
+                        document.getElementById("code").disabled = true;
+                        document.querySelector("button").disabled = true;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 13: Inheritance in C++</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff; /* Light Blue Background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #007BFF; /* Blue Header */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2rem;
+        }
+
+        /* Dua Section */
+        .dua-section {
+            background-color: #e3f2fd; /* Light Blue */
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dua-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007BFF;
+        }
+
+        /* Lesson Details Section */
+        .lesson-details {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .lesson-details h2 {
+            color: #007BFF;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .lesson-details h3 {
+            color: #0056b3;
+            font-size: 1.5rem;
+            margin-top: 15px;
+        }
+
+        .lesson-details ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .lesson-details ul li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .lesson-details ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        .lesson-details ul li strong {
+            color: #007BFF;
+        }
+
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        .code-example pre {
+            margin: 0;
+        }
+
+        .code-example code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            color: #d63384; /* Pink Code Color */
+        }
+
+        /* End of Lesson Section */
+        .end-section {
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: #e3f2fd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .end-section h2 {
+            color: #007BFF;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .options {
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .practice-btn {
+            background-color: #28a745; /* Green */
+            color: white;
+        }
+
+        .practice-btn:hover {
+            background-color: #218838;
+        }
+
+        .game-btn {
+            background-color: #dc3545; /* Red */
+            color: white;
+        }
+
+        .game-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Day 13: Inheritance in C++</h1>
+        <p>Learn about inheritance in C++ with <strong>ABU TURAB</strong></p>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <!-- Quranic Dua Section -->
+        <section class="dua-section">
+            <h2>Quranic Dua:</h2>
+            <p class="dua-text">"رَبِّ زِدْنِي عِلْمًا" (O Allah, increase me in knowledge).</p>
+        </section>
+
+        <!-- Lesson Details Section -->
+        <section class="lesson-details">
+            <h2>Lesson Details:</h2>
+            <p>
+                Inheritance C++ mein Object-Oriented Programming (OOP) ka ek powerful feature hai. Is lesson mein hum inheritance ke bare mein seekhenge.
+            </p>
+            <h3>Key Points:</h3>
+            <ul>
+                <li>
+                    <strong>Inheritance Definition:</strong> Inheritance ek class ko dusri class ke properties aur methods inherit karne ki capability deta hai.
+                    <div class="code-example">
+                        <pre>
+                            <code>
+class Parent {
+public:
+    int x;
+    void display() {
+        cout << "Value of x: " << x << endl;
+    }
+};
+
+class Child : public Parent {
+public:
+    int y;
+    void show() {
+        cout << "Value of y: " << y << endl;
+    }
+};
+                            </code>
+                        </pre>
+                    </div>
+                </li>
+                <li>
+                    <strong>Types of Inheritance:</strong>
+                    <ul>
+                        <li>Single Inheritance</li>
+                        <li>Multiple Inheritance</li>
+                        <li>Multilevel Inheritance</li>
+                        <li>Hierarchical Inheritance</li>
+                        <li>Hybrid Inheritance</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Example:</strong> Ek program jo single inheritance ka use karta hai:
+                    <div class="code-example">
+                        <pre>
+                            <code>
+#include &lt;iostream&gt;
+using namespace std;
+
+class Parent {
+public:
+    int x;
+    void display() {
+        cout << "Value of x: " << x << endl;
+    }
+};
+
+class Child : public Parent {
+public:
+    int y;
+    void show() {
+        cout << "Value of y: " << y << endl;
+    }
+};
+
+int main() {
+    Child c;
+    c.x = 10;
+    c.y = 20;
+    c.display();
+    c.show();
+
+    return 0;
+}
+                            </code>
+                        </pre>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- End of Lesson Section -->
+        <section class="end-section">
+            <h2>End of Lesson</h2>
+            <p>
+                Ab aap practice kar sakte hain ya ek interactive game khel sakte hain.
+            </p>
+            <div class="options">
+                <a href="practice13.html" class="button practice-btn">Practice</a>
+                <a href="game13.html" class="button game-btn">Play Game</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>Created with ❤️ by <strong>ABU TURAB</strong></p>
+    </footer>
+</body>
+</html>

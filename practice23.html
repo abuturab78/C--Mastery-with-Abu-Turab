@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Exercise - Day 23 - Abu Turab</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff; /* Light Blue Background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #007BFF; /* Blue Header */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2rem;
+        }
+
+        main {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Code Input Section */
+        #code {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #output {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        #hint {
+            margin-top: 10px;
+            font-style: italic;
+            color: #4CAF50;
+        }
+
+        #chances {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            background-color: #28a745; /* Green */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Practice Exercise - Day 23</h1>
+        <p>By Abu TURAB</p>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <h2>Write a C++ program for a Tic-Tac-Toe game:</h2>
+        <p>
+            Ek program likho jo Tic-Tac-Toe game ko implement kare aur do players ke beech mein game khelne de.
+        </p>
+        <textarea id="code" placeholder="Write your C++ code here..."></textarea>
+        <button class="button" onclick="runCode()">Run Code</button>
+        <div id="hint">Hint: Use a 3x3 grid and check for win conditions after each move.</div>
+        <div id="chances">Chances left: 5</div>
+        <h3>Output:</h3>
+        <pre id="output"></pre>
+    </main>
+
+    <script>
+        let chancesLeft = 5;
+        const requiredParts = [
+            "#include <iostream>",
+            "using namespace std;",
+            "int main()",
+            "return 0;"
+        ];
+
+        // Function to check for errors in the code
+        function checkForErrors(code) {
+            const errors = [];
+
+            // Check for missing parts
+            requiredParts.forEach(part => {
+                if (!code.includes(part)) {
+                    errors.push(`Error: Missing "${part}"`);
+                }
+            });
+
+            // Check for required game components
+            if (!code.includes("char board[3][3]")) {
+                errors.push("Error: Missing `board` array for the game grid.");
+            }
+            if (!code.includes("checkWin()")) {
+                errors.push("Error: Missing `checkWin` function.");
+            }
+
+            return errors;
+        }
+
+        // Function to run the code
+        function runCode() {
+            const code = document.getElementById("code").value;
+            const outputElement = document.getElementById("output");
+            const hintElement = document.getElementById("hint");
+            const chancesElement = document.getElementById("chances");
+
+            // Check for errors
+            const errors = checkForErrors(code);
+
+            if (errors.length > 0) {
+                chancesLeft--;
+                if (chancesLeft > 0) {
+                    outputElement.textContent = errors.join("\n");
+                    outputElement.classList.add("error");
+                    outputElement.classList.remove("success");
+                    hintElement.textContent = "Hint: Use a 3x3 grid and check for win conditions after each move.";
+                    chancesElement.textContent = "Chances left: " + chancesLeft;
+                } else {
+                    outputElement.textContent = "Great effort! Here's the correct code:\n\n" +
+                        "#include <iostream>\n\n" +
+                        "using namespace std;\n\n" +
+                        "char board[3][3] = {\n" +
+                        "    {'1', '2', '3'},\n" +
+                        "    {'4', '5', '6'},\n" +
+                        "    {'7', '8', '9'}\n" +
+                        "};\n\n" +
+                        "void displayBoard() {\n" +
+                        "    for (int i = 0; i < 3; i++) {\n" +
+                        "        for (int j = 0; j < 3; j++) {\n" +
+                        "            cout << board[i][j] << \" \";\n" +
+                        "        }\n" +
+                        "        cout << endl;\n" +
+                        "    }\n" +
+                        "}\n\n" +
+                        "bool checkWin() {\n" +
+                        "    // Check rows, columns, and diagonals\n" +
+                        "    for (int i = 0; i < 3; i++) {\n" +
+                        "        if (board[i][0] == board[i][1] && board[i][1] == board[i][2]) return true;\n" +
+                        "        if (board[0][i] == board[1][i] && board[1][i] == board[2][i]) return true;\n" +
+                        "    }\n" +
+                        "    if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) return true;\n" +
+                        "    if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) return true;\n" +
+                        "    return false;\n" +
+                        "}\n\n" +
+                        "int main() {\n" +
+                        "    int move;\n" +
+                        "    char player = 'X';\n\n" +
+                        "    cout << \"Welcome to Tic-Tac-Toe!\" << endl;\n\n" +
+                        "    for (int turn = 0; turn < 9; turn++) {\n" +
+                        "        displayBoard();\n" +
+                        "        cout << \"Player \" << player << \", enter your move (1-9): \";\n" +
+                        "        cin >> move;\n\n" +
+                        "        int row = (move - 1) / 3;\n" +
+                        "        int col = (move - 1) % 3;\n\n" +
+                        "        if (board[row][col] != 'X' && board[row][col] != 'O') {\n" +
+                        "            board[row][col] = player;\n" +
+                        "            if (checkWin()) {\n" +
+                        "                displayBoard();\n" +
+                        "                cout << \"Player \" << player << \" wins!\" << endl;\n" +
+                        "                return 0;\n" +
+                        "            }\n" +
+                        "            player = (player == 'X') ? 'O' : 'X';\n" +
+                        "        } else {\n" +
+                        "            cout << \"Invalid move! Try again.\" << endl;\n" +
+                        "            turn--;\n" +
+                        "        }\n" +
+                        "    }\n\n" +
+                        "    displayBoard();\n" +
+                        "    cout << \"It's a draw!\" << endl;\n\n" +
+                        "    return 0;\n" +
+                        "}";
+                    outputElement.classList.remove("error");
+                    outputElement.classList.add("success");
+                    hintElement.textContent = "You have used all your chances. Here's the correct code!";
+                    chancesElement.textContent = "Chances left: 0";
+                    document.getElementById("code").disabled = true;
+                    document.querySelector("button").disabled = true;
+                }
+            } else {
+                outputElement.textContent = "Your code is correct! Output:\n\n" +
+                    "Welcome to Tic-Tac-Toe!\n" +
+                    "1 2 3\n" +
+                    "4 5 6\n" +
+                    "7 8 9\n" +
+                    "Player X, enter your move (1-9): [User Input]\n" +
+                    "...\n" +
+                    "Player X wins!";
+                outputElement.classList.remove("error");
+                outputElement.classList.add("success");
+                hintElement.textContent = "Great job! Your code is correct.";
+                chancesElement.textContent = "Chances left: " + chancesLeft;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Quiz Game - Day 1 - Abu Turab</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS for Quiz Game */
+        #quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .option:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #result {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        #score {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>C++ Quiz Game - Day 1</h1>
+        <p>By Abu Turab</p>
+    </header>
+    <main>
+        <div id="quiz-container">
+            <div class="question" id="question"></div>
+            <div class="options" id="options"></div>
+            <div id="result"></div>
+            <div id="score">Score: 0</div>
+        </div>
+    </main>
+    <script>
+        // Quiz Questions and Answers
+        const quizData = [
+            {
+                question: "What is the correct syntax to print 'Hello, World!' in C++?",
+                options: [
+                    "cout << 'Hello, World!';",
+                    "print('Hello, World!');",
+                    "System.out.println('Hello, World!');",
+                    "console.log('Hello, World!');"
+                ],
+                answer: "cout << 'Hello, World!';"
+            },
+            {
+                question: "Which header file is used for input and output in C++?",
+                options: [
+                    "<iostream>",
+                    "<stdio.h>",
+                    "<inputoutput>",
+                    "<io.h>"
+                ],
+                answer: "<iostream>"
+            },
+            {
+                question: "What is the starting point of a C++ program?",
+                options: [
+                    "main()",
+                    "start()",
+                    "begin()",
+                    "init()"
+                ],
+                answer: "main()"
+            },
+            {
+                question: "Which operator is used to insert data into the output stream in C++?",
+                options: [
+                    ">>",
+                    "<<",
+                    "->",
+                    "::"
+                ],
+                answer: "<<"
+            },
+            {
+                question: "What is the correct way to end a statement in C++?",
+                options: [
+                    ".",
+                    ";",
+                    ":",
+                    ","
+                ],
+                answer: ";"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const resultElement = document.getElementById("result");
+        const scoreElement = document.getElementById("score");
+
+        // Load the current question
+        function loadQuestion() {
+            const currentQuizData = quizData[currentQuestion];
+            questionElement.textContent = currentQuizData.question;
+            optionsElement.innerHTML = "";
+
+            currentQuizData.options.forEach(option => {
+                const button = document.createElement("div");
+                button.textContent = option;
+                button.classList.add("option");
+                button.addEventListener("click", () => checkAnswer(option));
+                optionsElement.appendChild(button);
+            });
+        }
+
+        // Check the selected answer
+        function checkAnswer(selectedOption) {
+            const currentQuizData = quizData[currentQuestion];
+            if (selectedOption === currentQuizData.answer) {
+                resultElement.textContent = "Correct!";
+                score++;
+            } else {
+                resultElement.textContent = "Wrong! The correct answer is: " + currentQuizData.answer;
+            }
+
+            scoreElement.textContent = "Score: " + score;
+            currentQuestion++;
+
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                resultElement.textContent = "Quiz Over! Your final score is: " + score + "/" + quizData.length;
+                optionsElement.innerHTML = "";
+            }
+        }
+
+        // Start the quiz
+        loadQuestion();
+    </script>
+</body>
+</html>
